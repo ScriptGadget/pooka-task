@@ -1,0 +1,7 @@
+# Done Button - A simple event oracle for Ethereum.
+
+Done Button allows someone to indicate something happened. Pressing
+Done, sends a timestamp, an optional task id and the account number.
+
+Other contracts can query these values to learn if an event has
+happened.
