@@ -11,20 +11,20 @@ contract TestDoneButton {
       
     button.pressed(123);
       
-    var (fresh, time, value)  = button.events(this);      
+    var (fresh, time, value)  = button.presses(this);      
 
-    Assert.isNotZero(time, "There should be an event.");
+    Assert.isNotZero(time, "There should be an press.");
       
-    Assert.equal(value, 123, "The event should have a value of 123.");
+    Assert.equal(value, 123, "The press should have a value of 123.");
       
-    Assert.equal(fresh, true, "The event should still be fresh.");
+    Assert.equal(fresh, true, "The press should still be fresh.");
       
     if (time < now - 1 minutes) {
-        Assert.fail("The event should be recent");
+        Assert.fail("The press should be recent");
     }
 
     if (time > now) {
-        Assert.fail("The event should not be in the future.");
+        Assert.fail("The press should not be in the future.");
     }
   }
 

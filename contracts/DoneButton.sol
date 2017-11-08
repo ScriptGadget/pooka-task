@@ -1,17 +1,17 @@
 pragma solidity ^0.4.2;
 
-// Simple event oracle
+// Simple button press oracle
 contract DoneButton {
   address public owner = msg.sender;
   uint public creationTime = now;
     
-  struct Event {
-    bool fresh; // Have we already seen this event?
-    uint time;  // Currently the block time when the event arrived.
+  struct Press {
+    bool fresh; // Have we already seen this press?
+    uint time;  // Currently the block time when the press arrived.
     uint value; // Application specific.
   }
     
-  mapping (address => Event) public events;
+  mapping (address => Press) public presses;
     
   modifier onlyBy(address _account) {
     require(msg.sender == _account);
@@ -22,7 +22,7 @@ contract DoneButton {
 	}
 
   function pressed(uint value) {
-    events[msg.sender] = Event(true, now, value);
+    presses[msg.sender] = Press(true, now, value);
   }
 
   function clean() onlyBy(owner) {
