@@ -1,0 +1,27 @@
+<!DOCTYPE html>
+<html>
+<head>
+  <title>Pooka Partners -- Earn money as an imaginary friend.</title>
+  <link href='https://fonts.googleapis.com/css?family=Open+Sans:400,700' rel='stylesheet' type='text/css'>
+  <script src="./app.js"></script>
+</head>
+<body>
+  <h1>Pooka Partners</h1>
+  <h2>imaginary money for imaginary people</h2>
+  <br>
+  <h3>You have agreed to <span id="description">&nbsp;</span> by <span id="deadline">&nbsp;</span> for <span id="amount">&nbsp;</span>.</h3>
+  <br>
+  <h1>Done? Press this button. </h1>
+  <br><input type="hidden" id="task" value="123456"></input>
+  <br><br><button id="send" onclick="App.done()">Done</button>
+  <br><br>
+  <span id="status"></span>
+  <br>
+  <br>
+  <br>
+  <h2>More Tasks</h2>
+  <div id="task_list">
+    No open tasks.
+  </div>
+</body>
+</html>

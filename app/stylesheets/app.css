@@ -50,3 +50,15 @@ h3 {
 .hint {
   color: #666;
 }
+.tasks {
+    width: 90%;
+    margin: auto;
+}
+
+.tasks th {
+    text-align: center;
+}
+
+.tasks td {
+    text-align: center;
+}

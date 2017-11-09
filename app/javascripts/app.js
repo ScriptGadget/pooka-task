@@ -17,9 +17,17 @@ var DoneButton = contract(donebutton_artifacts);
 var accounts;
 var account;
 
+// Handy functions
+function getParameters(search) {
+  return search.slice(1).split('&').reduce(function(p,c,i,a) {p[c.split('=')[0]] = c.split('=')[1]; return p;}, {})
+};
+
 window.App = {
   start: function() {
     var self = this;
+    
+    // Make sure parameters are correct.
+    this.snarfParams();
 
     // Bootstrap the DoneButton abstraction for Use.
     DoneButton.setProvider(web3.currentProvider);
@@ -39,13 +47,54 @@ window.App = {
       accounts = accs;
       account = accounts[0];
     });
+    this.loadList();
+  },
+  snarfParams: function() {
+    var parameters = getParameters(location.search);
+    if (parameters['id'] === undefined) {
+      console.log("How did you get here?");
+      // Could do something like this, but not for the demo.
+      // location.replace("/");
+    }
+
+    var id = parameters['id'];
+    console.log(id);
+    document.getElementById("task").value = id;
+    var description = document.getElementById("description");
+    var deadline = document.getElementById("deadline");
+    var amount = document.getElementById("amount");
+    description.innerHTML = "Narfle the Garthok!";
+    deadline.innerHTML = "12/22/2017";
+    amount.innerHTML = "0.85";
   },
 
+  // Load a list of open tasks
+  loadList: function() {
+    var task_list = document.getElementById("task_list");
+    var tasks = [
+      {id: '11111', description: "Narfle the Garthok!", amount: "0.085", deadline: "12/22/2017", done: false},
+      {id: '22222', description: "Lolligag in Riverwood.", amount: "0.125", deadline: "11/15/2017", done: true},
+    ];
+
+    var html = '<table class="tasks"><thead><tr><th>Description</th><th>Amount</th><th>Deadline</th><th>Do It?</th></tr></thead>';
+    tasks.forEach(function (i) {
+      html += '<tr><td>' + i['description'] + '</td><td>'+ i['amount'] + '</td><td>'+ i['deadline']  +'</td><td>'+ '<a href="\done.html?id=' + i['id'] + '">Ok</a>' +'</td></tr>';
+    });
+    html += '</table>';
+    task_list.innerHTML = html;
+  },
+  
   setStatus: function(message) {
     var status = document.getElementById("status");
     status.innerHTML = message;
   },
+
+  // Add a new offer to the list of tasks in the contract.
+  offer: function() {
     
+  },
+
+  // Mark the current offer as done.
   done: function() {
     var self = this;
 
